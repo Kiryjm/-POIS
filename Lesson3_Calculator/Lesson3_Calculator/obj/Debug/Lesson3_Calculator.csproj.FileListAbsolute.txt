@@ -1,0 +1,21 @@
+G:\C#\Lesson3_Calculator\Lesson3_Calculator\bin\Debug\Lesson3_Calculator.exe.config
+G:\C#\Lesson3_Calculator\Lesson3_Calculator\bin\Debug\Lesson3_Calculator.exe
+G:\C#\Lesson3_Calculator\Lesson3_Calculator\bin\Debug\Lesson3_Calculator.pdb
+G:\C#\Lesson3_Calculator\Lesson3_Calculator\obj\Debug\Lesson3_Calculator.csprojResolveAssemblyReference.cache
+G:\C#\Lesson3_Calculator\Lesson3_Calculator\obj\Debug\Lesson3_Calculator.MainF.resources
+G:\C#\Lesson3_Calculator\Lesson3_Calculator\obj\Debug\Lesson3_Calculator.Properties.Resources.resources
+G:\C#\Lesson3_Calculator\Lesson3_Calculator\obj\Debug\Lesson3_Calculator.csproj.GenerateResource.Cache
+G:\C#\Lesson3_Calculator\Lesson3_Calculator\obj\Debug\Lesson3_Calculator.exe
+G:\C#\Lesson3_Calculator\Lesson3_Calculator\obj\Debug\Lesson3_Calculator.pdb
+E:\C#\Lesson3_Calculator\Lesson3_Calculator\bin\Debug\Lesson3_Calculator.exe.config
+E:\C#\Lesson3_Calculator\Lesson3_Calculator\obj\Debug\Lesson3_Calculator.exe
+E:\C#\Lesson3_Calculator\Lesson3_Calculator\obj\Debug\Lesson3_Calculator.pdb
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Lesson3_Calculator\Lesson3_Calculator\bin\Debug\Lesson3_Calculator.exe.config
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Lesson3_Calculator\Lesson3_Calculator\obj\Debug\Lesson3_Calculator.exe
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Lesson3_Calculator\Lesson3_Calculator\obj\Debug\Lesson3_Calculator.pdb
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Lesson3_Calculator\Lesson3_Calculator\bin\Debug\Lesson3_Calculator.exe
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Lesson3_Calculator\Lesson3_Calculator\bin\Debug\Lesson3_Calculator.pdb
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Lesson3_Calculator\Lesson3_Calculator\obj\Debug\Lesson3_Calculator.csprojResolveAssemblyReference.cache
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Lesson3_Calculator\Lesson3_Calculator\obj\Debug\Lesson3_Calculator.MainF.resources
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Lesson3_Calculator\Lesson3_Calculator\obj\Debug\Lesson3_Calculator.Properties.Resources.resources
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Lesson3_Calculator\Lesson3_Calculator\obj\Debug\Lesson3_Calculator.csproj.GenerateResource.Cache
