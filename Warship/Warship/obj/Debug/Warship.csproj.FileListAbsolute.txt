@@ -1,0 +1,8 @@
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Warship\Warship\bin\Debug\Warship.exe.config
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Warship\Warship\bin\Debug\Warship.exe
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Warship\Warship\bin\Debug\Warship.pdb
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Warship\Warship\obj\Debug\Warship.Form1.resources
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Warship\Warship\obj\Debug\Warship.Properties.Resources.resources
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Warship\Warship\obj\Debug\Warship.csproj.GenerateResource.Cache
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Warship\Warship\obj\Debug\Warship.exe
+G:\root\БГУ\C#(визуальное программирование)\Visual Studio\Warship\Warship\obj\Debug\Warship.pdb
