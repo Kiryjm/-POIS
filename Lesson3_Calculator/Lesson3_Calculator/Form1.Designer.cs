@@ -41,7 +41,7 @@
             this.ZeroBtn = new System.Windows.Forms.Button();
             this.MultBtn = new System.Windows.Forms.Button();
             this.PlusBtn = new System.Windows.Forms.Button();
-            this.MInusBtn = new System.Windows.Forms.Button();
+            this.MinusBtn = new System.Windows.Forms.Button();
             this.DivBtn = new System.Windows.Forms.Button();
             this.BackspaceBtn = new System.Windows.Forms.Button();
             this.ClearBtn = new System.Windows.Forms.Button();
@@ -191,16 +191,16 @@
             this.PlusBtn.UseVisualStyleBackColor = true;
             this.PlusBtn.Click += new System.EventHandler(this.PlusBtn_Click);
             // 
-            // MInusBtn
+            // MinusBtn
             // 
-            this.MInusBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MInusBtn.Location = new System.Drawing.Point(256, 146);
-            this.MInusBtn.Name = "MInusBtn";
-            this.MInusBtn.Size = new System.Drawing.Size(55, 56);
-            this.MInusBtn.TabIndex = 1;
-            this.MInusBtn.Text = "-";
-            this.MInusBtn.UseVisualStyleBackColor = true;
-            this.MInusBtn.Click += new System.EventHandler(this.MInusBtn_Click);
+            this.MinusBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MinusBtn.Location = new System.Drawing.Point(256, 146);
+            this.MinusBtn.Name = "MinusBtn";
+            this.MinusBtn.Size = new System.Drawing.Size(55, 56);
+            this.MinusBtn.TabIndex = 1;
+            this.MinusBtn.Text = "-";
+            this.MinusBtn.UseVisualStyleBackColor = true;
+            this.MinusBtn.Click += new System.EventHandler(this.MInusBtn_Click);
             // 
             // DivBtn
             // 
@@ -253,7 +253,7 @@
             this.ClientSize = new System.Drawing.Size(319, 327);
             this.Controls.Add(this.DivBtn);
             this.Controls.Add(this.ClearBtn);
-            this.Controls.Add(this.MInusBtn);
+            this.Controls.Add(this.MinusBtn);
             this.Controls.Add(this.NineBtn);
             this.Controls.Add(this.EightBtn);
             this.Controls.Add(this.BackspaceBtn);
@@ -291,7 +291,7 @@
         private System.Windows.Forms.Button ZeroBtn;
         private System.Windows.Forms.Button MultBtn;
         private System.Windows.Forms.Button PlusBtn;
-        private System.Windows.Forms.Button MInusBtn;
+        private System.Windows.Forms.Button MinusBtn;
         private System.Windows.Forms.Button DivBtn;
         private System.Windows.Forms.Button BackspaceBtn;
         private System.Windows.Forms.Button ClearBtn;

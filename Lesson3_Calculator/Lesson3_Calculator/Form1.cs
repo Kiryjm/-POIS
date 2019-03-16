@@ -17,7 +17,7 @@ namespace Lesson3_Calculator
             InitializeComponent();
         }
 
-        long x = 0;
+        long x = 0, temp = 0;
         char operation = ' ', ArOp = ' ';
 
         private void OneBtn_Click(object sender, EventArgs e)
@@ -188,7 +188,7 @@ namespace Lesson3_Calculator
 
         private void PlusBtn_Click(object sender, EventArgs e)
         {
-            x = Convert.ToInt64(textBox1.Text);
+            x += Convert.ToInt64(textBox1.Text);
             operation = '+';
             ArOp = '+';
 
@@ -205,6 +205,7 @@ namespace Lesson3_Calculator
                     if (operation != '=')
                         x = y;
                     operation = '=';
+                    x = 0;
                     break;
 
                 case '-':
@@ -212,6 +213,7 @@ namespace Lesson3_Calculator
                     if (operation != '=')
                         x = y;
                     operation = '=';
+                    x = 0;
                     break;
 
                 case '*':
@@ -219,6 +221,7 @@ namespace Lesson3_Calculator
                     if (operation != '=')
                         x = y;
                     operation = '=';
+                    x = 0;
                     break;
 
                 case '/':
@@ -226,6 +229,7 @@ namespace Lesson3_Calculator
                     if (operation != '=')
                         x = y;
                     operation = '=';
+                    x = 0;
                     break;
             
             }
@@ -233,21 +237,24 @@ namespace Lesson3_Calculator
 
         private void MInusBtn_Click(object sender, EventArgs e)
         {
-            x = Convert.ToInt64(textBox1.Text);
+            temp = Convert.ToInt64(textBox1.Text);
+            x -= temp;
             operation = '+';
             ArOp = '-';
         }
 
         private void MultBtn_Click(object sender, EventArgs e)
         {
-            x = Convert.ToInt64(textBox1.Text);
+            temp = Convert.ToInt64(textBox1.Text);
+            x *= temp;
             operation = '+';
             ArOp = '*';
         }
 
         private void DivBtn_Click(object sender, EventArgs e)
         {
-            x = Convert.ToInt64(textBox1.Text);
+            temp = Convert.ToInt64(textBox1.Text);
+            x *= temp;
             operation = '+';
             ArOp = '/';
         }
