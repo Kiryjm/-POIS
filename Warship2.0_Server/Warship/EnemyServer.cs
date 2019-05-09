@@ -14,7 +14,7 @@ namespace Warship
 {
    public class EnemyServer
    {
-       private const int Port = 50001;
+       private const int Port = 50000;
        private char[,] Map;
        private TcpListener server;
        private Thread serverThread;

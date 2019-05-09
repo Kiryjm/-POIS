@@ -13,7 +13,7 @@ namespace Warship
 {
     public class HomeClient
     {
-        private const int port = 50000;
+        private const int port = 50001;
         private const string server = "127.0.0.1";
         private TcpClient client;
         private Message message;
