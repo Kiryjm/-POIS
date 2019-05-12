@@ -9,9 +9,9 @@ namespace Warship
   
         public enum MessageType
         {
-            startPlayerMessage = 1, // first player message type
-            pointMessage = 2, // point
-            turnMessage = 3 // turn
+            startPlayerMessage = 1, 
+            pointMessage = 2,
+            turnMessage = 3 
 
         }
  

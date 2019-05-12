@@ -63,7 +63,11 @@ namespace Warship
 
         }
 
+        public Message(Point point)
+        {
+            this.Point = point;
 
+        }
 
 
 

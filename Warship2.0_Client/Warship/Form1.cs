@@ -149,21 +149,22 @@ namespace Warship
             ShowMap(HomeMap, HomeShips);
             //ShowMap(EnemyMap, EnemyShips);
             int processId = Process.GetCurrentProcess().Id;
-            //Message message = new Message(processId);
+            Message processIdMessage = new Message(processId);
             EnemyServer enemyServer = new EnemyServer(HomeMap);
             enemyServer.serverStart();
-
+            HomeClient client = new HomeClient();
             //compare process id
-            processId = CompareProcessId(processId,);
+            processIdMessage = client.SendAndGetAnswer(processIdMessage);
+            processId = CompareProcessId(processId, );
 
 
 
 
         }
 
-        private int CompareProcessId(int ClientProcessId, int ServerProcessId)
+        private int CompareProcessId(Message clientProcessIdMessage, Message ServerProcessIdMessage)
         {
-            int comparisonResult = ClientProcessId > ServerProcessId ? 1 : 0;  
+            int comparisonResult = clientProcessIdMessage.ProcessId > ServerProcessIdMessage.ProcessId ? 1 : 0;  
             return comparisonResult;
         }
 
@@ -203,7 +204,7 @@ namespace Warship
                 a = sender as Label;
                 Point enemyCoordinates = GetEnemyCoordinates(a);
                 HomeClient homeClient = new HomeClient();
-                Message message = new Message(enemyCoordinates, 0);
+                Message message = new Message(enemyCoordinates);
                 message = homeClient.SendAndGetAnswer(message);
                 //int turn = Convert.ToInt32(homeClient.turnSend(message));
 
