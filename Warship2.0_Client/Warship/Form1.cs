@@ -149,13 +149,14 @@ namespace Warship
             ShowMap(HomeMap, HomeShips);
             //ShowMap(EnemyMap, EnemyShips);
             int processId = Process.GetCurrentProcess().Id;
-            Message processIdMessage = new Message(processId);
+            Message clientProcessIdMessage = new Message(processId);
+            Message serverProcessIdMessage = new Message();
             EnemyServer enemyServer = new EnemyServer(HomeMap);
             enemyServer.serverStart();
             HomeClient client = new HomeClient();
             //compare process id
-            processIdMessage = client.SendAndGetAnswer(processIdMessage);
-            processId = CompareProcessId(processId, );
+            int serverProcessId = client.SendAndGetAnswer(clientProcessIdMessage).ProcessId;
+            processId = CompareProcessId(clientProcessIdMessage, serverProcessIdMessage);
 
 
 

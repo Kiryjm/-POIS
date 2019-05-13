@@ -19,3 +19,12 @@ G:\root\БГУ\C#(визуальное программирование)\Visual 
 G:\root\C#\CsPOIS\Warship2.0_Client\Warship\bin\Debug\Warship.exe.config
 G:\root\C#\CsPOIS\Warship2.0_Client\Warship\obj\Debug\Warship.exe
 G:\root\C#\CsPOIS\Warship2.0_Client\Warship\obj\Debug\Warship.pdb
+G:\root\C#\CsPOIS\Warship2.0_Server\Warship\bin\Debug\Warship.exe.config
+G:\root\C#\CsPOIS\Warship2.0_Server\Warship\obj\Debug\Warship.exe
+G:\root\C#\CsPOIS\Warship2.0_Server\Warship\obj\Debug\Warship.pdb
+G:\root\C#\CsPOIS\Warship2.0_Server\Warship\bin\Debug\Warship.exe
+G:\root\C#\CsPOIS\Warship2.0_Server\Warship\bin\Debug\Warship.pdb
+G:\root\C#\CsPOIS\Warship2.0_Server\Warship\obj\Debug\Warship.csprojResolveAssemblyReference.cache
+G:\root\C#\CsPOIS\Warship2.0_Server\Warship\obj\Debug\Warship.Form1.resources
+G:\root\C#\CsPOIS\Warship2.0_Server\Warship\obj\Debug\Warship.Properties.Resources.resources
+G:\root\C#\CsPOIS\Warship2.0_Server\Warship\obj\Debug\Warship.csproj.GenerateResource.Cache
