@@ -20,6 +20,7 @@ namespace Warship
 
         char[,] HomeMap = new char[12, 12];
         char[,] EnemyMap = new char[12, 12];
+        private bool turnFlag;
 
         public void GenerateMap(char[,] Map)
         {
@@ -148,25 +149,25 @@ namespace Warship
             //GenerateMap(EnemyMap);
             ShowMap(HomeMap, HomeShips);
             //ShowMap(EnemyMap, EnemyShips);
-            int processId = Process.GetCurrentProcess().Id;
-            Message clientProcessIdMessage = new Message(processId);
+            int clientProcessId = Process.GetCurrentProcess().Id;
+            Message clientProcessIdMessage = new Message(clientProcessId);
             Message serverProcessIdMessage = new Message();
             EnemyServer enemyServer = new EnemyServer(HomeMap);
             enemyServer.serverStart();
             HomeClient client = new HomeClient();
             //compare process id
             int serverProcessId = client.SendAndGetAnswer(clientProcessIdMessage).ProcessId;
-            processId = CompareProcessId(clientProcessIdMessage, serverProcessIdMessage);
-
+            turnFlag = CompareProcessId(clientProcessId, serverProcessId);
+            if (turnFlag)
+                this.Enabled = turnFlag;
 
 
 
         }
 
-        private int CompareProcessId(Message clientProcessIdMessage, Message ServerProcessIdMessage)
+        private bool CompareProcessId(int clientProcessId, int serverProcessId)
         {
-            int comparisonResult = clientProcessIdMessage.ProcessId > ServerProcessIdMessage.ProcessId ? 1 : 0;  
-            return comparisonResult;
+            return clientProcessId > serverProcessId;  
         }
 
         private void Label_Click_Home(object sender, EventArgs e)
