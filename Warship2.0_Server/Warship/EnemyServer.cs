@@ -64,20 +64,20 @@ namespace Warship
                Message receivedMessage = (Message)formatter.Deserialize(stream);
                Message response = new Message();
 
-               //switch ((int)receivedMessage.MessageType)
-               //{
-               //    case 1 : response.ProcessId = receivedMessage.ProcessId;
-               //        break;
+               switch (receivedMessage.MessageType)
+               {
+                   case MessageType.startPlayerMessage: response.ProcessId = receivedMessage.ProcessId;
+                       break;
 
-               //    case 2: response.PointValue = Map[receivedMessage.Point.X, receivedMessage.Point.Y];
-               //        break;
+                   case MessageType.pointMessage: response.PointValue = Map[receivedMessage.Point.X, receivedMessage.Point.Y];
+                       break;
 
-               //    case 3: response.Turn = receivedMessage.Turn;
-               //        break;
+                   case MessageType.turnMessage: response.Turn = receivedMessage.Turn;
+                       break;
 
-               //}
+               }
 
-               response.PointValue = Map[receivedMessage.Point.X, receivedMessage.Point.Y];
+               //response.PointValue = Map[receivedMessage.Point.X, receivedMessage.Point.Y];
                // сообщение для отправки клиенту
            
                // преобразуем сообщение в массив байтов

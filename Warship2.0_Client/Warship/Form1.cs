@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -150,24 +151,25 @@ namespace Warship
             ShowMap(HomeMap, HomeShips);
             //ShowMap(EnemyMap, EnemyShips);
             int clientProcessId = Process.GetCurrentProcess().Id;
-            Message clientProcessIdMessage = new Message(clientProcessId);
-            Message serverProcessIdMessage = new Message();
+            Message clientProcessIdMessage = new Message(clientProcessId, MessageType.startPlayerMessage);
+            HomeClient client = new HomeClient();
             EnemyServer enemyServer = new EnemyServer(HomeMap);
             enemyServer.serverStart();
-            HomeClient client = new HomeClient();
+            Message serverProcessIdMessage = client.SendAndGetAnswer(clientProcessIdMessage);
+            
             //compare process id
-            int serverProcessId = client.SendAndGetAnswer(clientProcessIdMessage).ProcessId;
-            turnFlag = CompareProcessId(clientProcessId, serverProcessId);
-            if (turnFlag)
-                this.Enabled = turnFlag;
+            //if (CompareProcessId(clientProcessIdMessage, serverProcessIdMessage))
+            //{
+            //    EnemyShips.Enabled = false;
+            //}
 
 
 
         }
 
-        private bool CompareProcessId(int clientProcessId, int serverProcessId)
+        private bool CompareProcessId(Message sentMessage, Message receivedMessage)
         {
-            return clientProcessId > serverProcessId;  
+            return sentMessage.ProcessId < receivedMessage.ProcessId;  
         }
 
         private void Label_Click_Home(object sender, EventArgs e)
@@ -200,13 +202,12 @@ namespace Warship
 
         private void Label_Click_Enemy(object sender, EventArgs e)
         {
-            
-            
+
                 Label a = new Label();
                 a = sender as Label;
                 Point enemyCoordinates = GetEnemyCoordinates(a);
                 HomeClient homeClient = new HomeClient();
-                Message message = new Message(enemyCoordinates);
+                Message message = new Message(enemyCoordinates, MessageType.pointMessage);
                 message = homeClient.SendAndGetAnswer(message);
                 //int turn = Convert.ToInt32(homeClient.turnSend(message));
 

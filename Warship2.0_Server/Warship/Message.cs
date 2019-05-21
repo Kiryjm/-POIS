@@ -32,12 +32,23 @@ namespace Warship
         {
         }
 
+        public Message(int processId, MessageType messageType)
+        {
+            this.ProcessId = processId;
+            this.MessageType = messageType;
+        }
+
+        public Message(Point point, MessageType messageType)
+        {
+            this.Point = point;
+            this.MessageType = messageType;
+        }
+
         public Message(int processId, Point point, int turn)
         {
             this.ProcessId = processId;
             this.Point = point;
             this.Turn = turn;
-            
 
         }
 
@@ -45,7 +56,6 @@ namespace Warship
         {
             this.Point = point;
             this.Turn = turn;
-            
 
         }
 
@@ -53,7 +63,7 @@ namespace Warship
         {
             this.ProcessId = processId;
             this.Turn = turn;
-            
+
         }
 
 
@@ -68,8 +78,6 @@ namespace Warship
             this.Point = point;
 
         }
-
-
 
         public int ProcessId
         {
