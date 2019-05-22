@@ -155,6 +155,7 @@ namespace Warship
             HomeClient client = new HomeClient();
             EnemyServer enemyServer = new EnemyServer(HomeMap);
             enemyServer.serverStart();
+
             Message serverProcessIdMessage = client.SendAndGetAnswer(clientProcessIdMessage);
             
             //compare process id
