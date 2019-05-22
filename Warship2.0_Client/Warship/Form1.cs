@@ -153,16 +153,16 @@ namespace Warship
             int clientProcessId = Process.GetCurrentProcess().Id;
             Message clientProcessIdMessage = new Message(clientProcessId, MessageType.startPlayerMessage);
             HomeClient client = new HomeClient();
-            EnemyServer enemyServer = new EnemyServer(HomeMap);
+            EnemyServer enemyServer = new EnemyServer(HomeMap, this);
             enemyServer.serverStart();
 
             Message serverProcessIdMessage = client.SendAndGetAnswer(clientProcessIdMessage);
             
-            //compare process id
-            //if (CompareProcessId(clientProcessIdMessage, serverProcessIdMessage))
-            //{
-            //    EnemyShips.Enabled = false;
-            //}
+            
+            if (CompareProcessId(clientProcessIdMessage, serverProcessIdMessage))
+            {
+                EnemyShips.Enabled = false;
+            }
 
 
 
@@ -219,6 +219,9 @@ namespace Warship
                             a.ForeColor = Color.Black;
                             //turn++;
                             MessageBox.Show("Missed! Wait for your enemy's turn.");
+                            EnemyShips.Enabled = false;
+                            HomeClient newHomeClient = new HomeClient();
+                            newHomeClient.SendAndGetAnswer(new Message(){MessageType = MessageType.turnMessage});
                             break;
                         case 'o': a.Text = Convert.ToString(Chars[3]);
                             a.ForeColor = Color.Black;

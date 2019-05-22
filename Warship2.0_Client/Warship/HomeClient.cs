@@ -67,7 +67,12 @@ namespace Warship
 
         public Message SendAndGetAnswer (Message message)
         {
-            client.Connect(server, port);
+            if (!client.Connected)
+            {
+                client.Connect(server, port);
+            }
+
+           
             NetworkStream stream = client.GetStream();
             byte[] data;
             IFormatter formatter = new BinaryFormatter();

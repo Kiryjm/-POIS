@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,7 +17,7 @@ namespace Warship
         Random rnd = new Random();
         private string Chars = " loxh";
         private string Title = " ABCDEFGHIJ";
-        int[] Ships = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1};
+        int[] Ships = { 4, 3, 3, 2, 2, 2, 1, 1, 1, 1 };
 
         char[,] HomeMap = new char[12, 12];
         char[,] EnemyMap = new char[12, 12];
@@ -25,8 +26,8 @@ namespace Warship
         public void GenerateMap(char[,] Map)
         {
             //Filling array with spaces
-            
-            for(int i = 0; i < 11; i++)
+
+            for (int i = 0; i < 11; i++)
                 for (int j = 0; j < 11; j++)
                     Map[i, j] = Chars[0];
 
@@ -49,9 +50,9 @@ namespace Warship
                 if (free)
                 {
                     for (int i = -1; i < ShipLength + 1; i++)
-                    for (int j = -1; j <= 1; j++)
-                        Map[X + i * Orientation + j * (1 - Orientation),
-                            Y + j * Orientation + i * (1 - Orientation)] = Chars[4];
+                        for (int j = -1; j <= 1; j++)
+                            Map[X + i * Orientation + j * (1 - Orientation),
+                                Y + j * Orientation + i * (1 - Orientation)] = Chars[4];
 
                     for (int i = 0; i < ShipLength; i++)
                         Map[X + i * Orientation, Y + i * (1 - Orientation)] = Chars[2];
@@ -71,12 +72,12 @@ namespace Warship
         //showing map on the form
         public void ShowMap(char[,] Map, TableLayoutPanel tlp)
         {
-            for(int i = 1; i < 11; i++)
+            for (int i = 1; i < 11; i++)
                 for (int j = 1; j < 11; j++)
                 {
                     Label label = tlp.Controls[i * 11 + j] as Label;
                     label.Text = Convert.ToString(Map[i, j]);
-                   // label.ForeColor = label.BackColor;
+                    // label.ForeColor = label.BackColor;
                 }
 
 
@@ -90,7 +91,7 @@ namespace Warship
         private void Form1_Load(object sender, EventArgs e)
         {
             HomeShips.Controls.Clear();
-            for (int i = 0; i < 11; i++) 
+            for (int i = 0; i < 11; i++)
                 for (int j = 0; j < 11; j++)
                 {
                     Label homeShip = new Label();
@@ -101,8 +102,8 @@ namespace Warship
                     homeShip.Text = " ";
                     HomeShips.Controls.Add(homeShip, j, i);
                     homeShip.Click += Label_Click_Home;
-                    
-                    
+
+
                     Label enemyShip = new Label();
                     enemyShip.Dock = DockStyle.Fill;
                     enemyShip.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -112,10 +113,10 @@ namespace Warship
                     EnemyShips.Controls.Add(enemyShip, j, i);
                     enemyShip.Click += Label_Click_Enemy;
                 }
-            
+
             for (int i = 1; i < 11; i++)
             {
-                Label enemyShip = EnemyShips.Controls[i*11] as Label;
+                Label enemyShip = EnemyShips.Controls[i * 11] as Label;
                 enemyShip.Font = new System.Drawing.Font("Arial", 12);
                 enemyShip.Text = Convert.ToString(i);
 
@@ -128,15 +129,15 @@ namespace Warship
                 enemyShip.Text = Convert.ToString(Title[j]);
 
             }
-            
+
             for (int i = 1; i < 11; i++)
             {
-                Label homeShip = HomeShips.Controls[i*11] as Label;
+                Label homeShip = HomeShips.Controls[i * 11] as Label;
                 homeShip.Font = new System.Drawing.Font("Arial", 12);
                 homeShip.Text = Convert.ToString(i);
 
             }
-            
+
             for (int j = 1; j < 11; j++)
             {
                 Label homeShip = HomeShips.Controls[j] as Label;
@@ -152,15 +153,16 @@ namespace Warship
             int clientProcessId = Process.GetCurrentProcess().Id;
             Message clientProcessIdMessage = new Message(clientProcessId, MessageType.startPlayerMessage);
             HomeClient client = new HomeClient();
-            EnemyServer enemyServer = new EnemyServer(HomeMap);
+            EnemyServer enemyServer = new EnemyServer(HomeMap, this);
             enemyServer.serverStart();
+
             Message serverProcessIdMessage = client.SendAndGetAnswer(clientProcessIdMessage);
 
-            //compare process id
-            //if (CompareProcessId(clientProcessIdMessage, serverProcessIdMessage))
-            //{
-            //    EnemyShips.Enabled = false;
-            //}
+
+            if (CompareProcessId(clientProcessIdMessage, serverProcessIdMessage))
+            {
+                EnemyShips.Enabled = false;
+            }
 
 
 
@@ -201,32 +203,34 @@ namespace Warship
 
         private void Label_Click_Enemy(object sender, EventArgs e)
         {
-            
-            
-                Label a = new Label();
-                a = sender as Label;
-                Point enemyCoordinates = GetEnemyCoordinates(a);
-                HomeClient homeClient = new HomeClient();
-                Message message = new Message(enemyCoordinates);
-                message = homeClient.SendAndGetAnswer(message);
-                //int turn = Convert.ToInt32(homeClient.turnSend(message));
 
-               
-                    switch (message.PointValue)
-                    {
-                        case ' ': a.Text = Convert.ToString(Chars[1]);
-                            a.ForeColor = Color.Black;
-                            //turn++;
-                            MessageBox.Show("Missed! Wait for your enemy's turn.");
-                            break;
-                        case 'o': a.Text = Convert.ToString(Chars[3]);
-                            a.ForeColor = Color.Black;
-                            break;
-                    }
+            Label a = new Label();
+            a = sender as Label;
+            Point enemyCoordinates = GetEnemyCoordinates(a);
+            HomeClient homeClient = new HomeClient();
+            Message message = new Message(enemyCoordinates, MessageType.pointMessage);
+            message = homeClient.SendAndGetAnswer(message);
+            //int turn = Convert.ToInt32(homeClient.turnSend(message));
 
 
-                
-            
+            switch (message.PointValue)
+            {
+                case ' ': a.Text = Convert.ToString(Chars[1]);
+                    a.ForeColor = Color.Black;
+                    //turn++;
+                    MessageBox.Show("Missed! Wait for your enemy's turn.");
+                    EnemyShips.Enabled = false;
+                    HomeClient newHomeClient = new HomeClient();
+                    newHomeClient.SendAndGetAnswer(new Message() { MessageType = MessageType.turnMessage });
+                    break;
+                case 'o': a.Text = Convert.ToString(Chars[3]);
+                    a.ForeColor = Color.Black;
+                    break;
+            }
+
+
+
+
 
         }
     }

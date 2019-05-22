@@ -23,7 +23,7 @@ namespace Warship
             client = new TcpClient();
         }
 
-        
+
         //public string pointSend(Point point)
         //{
         //    client.Connect(server,port);
@@ -40,7 +40,7 @@ namespace Warship
 
         //        }
         //        data = ms.ToArray();
-                
+
         //    }
 
         //    stream.Write(data, 0, data.Length);
@@ -65,9 +65,14 @@ namespace Warship
             }
         }
 
-        public Message SendAndGetAnswer (Message message)
+        public Message SendAndGetAnswer(Message message)
         {
-            client.Connect(server, port);
+            if (!client.Connected)
+            {
+                client.Connect(server, port);
+            }
+
+
             NetworkStream stream = client.GetStream();
             byte[] data;
             IFormatter formatter = new BinaryFormatter();
@@ -104,7 +109,7 @@ namespace Warship
         //            response.Append(Encoding.UTF8.GetString(data, 0, bytes));
 
         //        }
-                
+
         //        while (stream.DataAvailable);
 
         //        return message;

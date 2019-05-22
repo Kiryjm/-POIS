@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Warship
 {
@@ -18,10 +20,12 @@ namespace Warship
        private char[,] Map;
        private TcpListener server;
        private Thread serverThread;
-        public EnemyServer(char[,] HomeMap)
+       private Form1 mainForm;
+        public EnemyServer(char[,] HomeMap, Form1 mainForm)
         {
             Map = HomeMap;
-            
+            this.mainForm = mainForm;
+
         }
 
        public void serverStart()
@@ -63,16 +67,21 @@ namespace Warship
 
                Message receivedMessage = (Message)formatter.Deserialize(stream);
                Message response = new Message();
+               
 
                switch (receivedMessage.MessageType)
                {
-                   case MessageType.startPlayerMessage: response.ProcessId = receivedMessage.ProcessId;
+                   case MessageType.startPlayerMessage:
+                       response.ProcessId = Process.GetCurrentProcess().Id;
                        break;
 
-                   case MessageType.pointMessage: response.PointValue = Map[receivedMessage.Point.X, receivedMessage.Point.Y];
+                   case MessageType.pointMessage: 
+                       response.PointValue = Map[receivedMessage.Point.X, receivedMessage.Point.Y];
                        break;
 
-                   case MessageType.turnMessage: response.Turn = receivedMessage.Turn;
+                   case MessageType.turnMessage: 
+                       mainForm.EnemyShips.Invoke((MethodInvoker)delegate { mainForm.EnemyShips.Enabled = true;});
+                       
                        break;
 
                }
