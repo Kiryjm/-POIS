@@ -14,93 +14,93 @@ using System.Windows.Forms;
 
 namespace Warship
 {
-   public class EnemyServer
-   {
-       private const int Port = 50000;
-       private char[,] Map;
-       private TcpListener server;
-       private Thread serverThread;
-       private Form1 mainForm;
+    public class EnemyServer
+    {
+        private const int Port = 50000;
+        private char[,] Map;
+        private TcpListener server;
+        private Thread serverThread;
+        private Form1 mainForm;
+
+
         public EnemyServer(char[,] HomeMap, Form1 mainForm)
         {
             Map = HomeMap;
             this.mainForm = mainForm;
-
         }
 
-       public void serverStart()
-       {
-           server = new TcpListener(Port);
-           serverThread = new Thread(ServerWorker);
-           serverThread.Start();
-       }
+        public void serverStart()
+        {
+            server = new TcpListener(Port);
+            serverThread = new Thread(ServerWorker);
+            serverThread.Start();
+        }
 
-       private byte[] ObjectToByteArray(object obj)
-       {
-           if (obj == null)
-               return null;
-           BinaryFormatter bf = new BinaryFormatter();
-           using (MemoryStream ms = new MemoryStream())
-           {
-               bf.Serialize(ms, obj);
-               return ms.ToArray();
-           }
-       }
+        private byte[] ObjectToByteArray(object obj)
+        {
+            if (obj == null)
+                return null;
+            BinaryFormatter bf = new BinaryFormatter();
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bf.Serialize(ms, obj);
+                return ms.ToArray();
+            }
+        }
 
-       private void ServerWorker()
-       {
-           server.Start();
+        private void ServerWorker()
+        {
+            server.Start();
 
-           byte[] data;
-           while (true)
-           {
-               Console.WriteLine("Ожидание подключений... ");
+            byte[] data;
+            while (true)
+            {
+                Console.WriteLine("Ожидание подключений... ");
 
-               // получаем входящее подключение
-               TcpClient client = server.AcceptTcpClient();
-               Console.WriteLine("Подключен клиент. Выполнение запроса...");
+                // получаем входящее подключение
+                TcpClient client = server.AcceptTcpClient();
+                Console.WriteLine("Подключен клиент. Выполнение запроса...");
 
-               // получаем сетевой поток для чтения и записи
-               NetworkStream stream = client.GetStream();
-               
-               IFormatter formatter = new BinaryFormatter();
+                // получаем сетевой поток для чтения и записи
+                NetworkStream stream = client.GetStream();
 
-               Message receivedMessage = (Message)formatter.Deserialize(stream);
-               Message response = new Message();
-               
+                IFormatter formatter = new BinaryFormatter();
 
-               switch (receivedMessage.MessageType)
-               {
-                   case MessageType.startPlayerMessage:
-                       response.ProcessId = Process.GetCurrentProcess().Id;
-                       break;
+                Message receivedMessage = (Message)formatter.Deserialize(stream);
+                Message response = new Message();
 
-                   case MessageType.pointMessage: 
-                       response.PointValue = Map[receivedMessage.Point.X, receivedMessage.Point.Y];
-                       break;
 
-                   case MessageType.turnMessage: 
-                       mainForm.EnemyShips.Invoke((MethodInvoker)delegate { mainForm.EnemyShips.Enabled = true;});
-                       
-                       break;
+                switch (receivedMessage.MessageType)
+                {
+                    case MessageType.startPlayerMessage:
+                        response.ProcessId = Process.GetCurrentProcess().Id;
+                        break;
 
-               }
+                    case MessageType.pointMessage:
+                        response.PointValue = Map[receivedMessage.Point.X, receivedMessage.Point.Y];
+                        break;
 
-               //response.PointValue = Map[receivedMessage.Point.X, receivedMessage.Point.Y];
-               // сообщение для отправки клиенту
-           
-               // преобразуем сообщение в массив байтов
-               data = ObjectToByteArray(response);
+                    case MessageType.turnMessage:
+                        mainForm.unlockEnemyShips();
+                        break;
 
-               // отправка сообщения
-               stream.Write(data, 0, data.Length);
-               Console.WriteLine("Отправлено сообщение: {0}", response);
-               // закрываем поток
-               stream.Close();
-               // закрываем подключение
-               client.Close();
-           }
-       }
+                }
 
-   }
+                
+                // сообщение для отправки клиенту
+
+                // преобразуем сообщение в массив байтов
+                data = ObjectToByteArray(response);
+
+                // отправка сообщения
+                stream.Write(data, 0, data.Length);
+                Console.WriteLine("Отправлено сообщение: {0}", response);
+                // закрываем поток
+                stream.Close();
+                // закрываем подключение
+                client.Close();
+            }
+        }
+
+    }
 }

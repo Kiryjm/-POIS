@@ -21,11 +21,12 @@ namespace Warship
         private TcpListener server;
         private Thread serverThread;
         private Form1 mainForm;
+
+
         public EnemyServer(char[,] HomeMap, Form1 mainForm)
         {
             Map = HomeMap;
             this.mainForm = mainForm;
-
         }
 
         public void serverStart()
@@ -80,13 +81,12 @@ namespace Warship
                         break;
 
                     case MessageType.turnMessage:
-                        mainForm.EnemyShips.Invoke((MethodInvoker)delegate { mainForm.EnemyShips.Enabled = true; });
-
+                        mainForm.unlockEnemyShips();
                         break;
 
                 }
 
-                //response.PointValue = Map[receivedMessage.Point.X, receivedMessage.Point.Y];
+
                 // сообщение для отправки клиенту
 
                 // преобразуем сообщение в массив байтов

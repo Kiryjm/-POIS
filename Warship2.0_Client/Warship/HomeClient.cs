@@ -23,36 +23,6 @@ namespace Warship
             client = new TcpClient();
         }
 
-        
-        //public string pointSend(Point point)
-        //{
-        //    client.Connect(server,port);
-        //    NetworkStream stream = client.GetStream();
-        //    StringBuilder response = new StringBuilder();
-        //    byte[] data;
-
-        //    using (var ms = new MemoryStream())
-        //    {
-        //        using (var bw = new BinaryWriter(ms))
-        //        {
-        //                bw.Write(point.X);
-        //                bw.Write(point.Y);
-
-        //        }
-        //        data = ms.ToArray();
-                
-        //    }
-
-        //    stream.Write(data, 0, data.Length);
-        //    do
-        //    {
-        //        int bytes = stream.Read(data, 0, data.Length);
-        //        response.Append(Encoding.UTF8.GetString(data, 0, bytes));
-        //    }
-        //    while (stream.DataAvailable);
-
-        //    return response.ToString();
-        //}
         private byte[] ObjectToByteArray(object obj)
         {
             if (obj == null)
@@ -83,37 +53,6 @@ namespace Warship
 
             return receivedMessage;
         }
-
-
-        //public Message turnSend(Message message)
-        //{
-        //    PlayerTurnSender playerTurnSender = new PlayerTurnSender();
-        //    NetworkStream stream = client.GetStream();
-        //    StringBuilder response = new StringBuilder();
-        //    byte[] data;
-
-        //    using (var memoryStream = new MemoryStream())
-        //    {
-        //        using (var binaryWriter = new BinaryWriter(memoryStream))
-        //        {
-        //            binaryWriter.Write(message.Turn);
-        //        }
-
-        //        data = memoryStream.ToArray();
-        //    }
-
-        //    stream.Write(data, 0, data.Length);
-        //        do
-        //        {
-        //            int bytes = stream.Read(data, 0, data.Length);
-        //            response.Append(Encoding.UTF8.GetString(data, 0, bytes));
-
-        //        }
-                
-        //        while (stream.DataAvailable);
-
-        //        return message;
-        //    }
 
     }
 }

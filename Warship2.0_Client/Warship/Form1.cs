@@ -18,15 +18,25 @@ namespace Warship
         private string Chars = " loxh";
         private string Title = " ABCDEFGHIJ";
         int[] Ships = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1};
-
         char[,] HomeMap = new char[12, 12];
         char[,] EnemyMap = new char[12, 12];
-        private bool turnFlag;
 
+       public void unlockEnemyShips()
+        {
+            if (InvokeRequired)
+                Invoke(new MethodInvoker(delegate()
+                {
+                    EnemyShips.Enabled = true;
+                }));
+            else
+            {
+                EnemyShips.Enabled = true;
+            }
+        }
+        
         public void GenerateMap(char[,] Map)
         {
             //Filling array with spaces
-            
             for(int i = 0; i < 11; i++)
                 for (int j = 0; j < 11; j++)
                     Map[i, j] = Chars[0];
@@ -96,18 +106,18 @@ namespace Warship
                 {
                     Label homeShip = new Label();
                     homeShip.Dock = DockStyle.Fill;
-                    homeShip.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-                    homeShip.Font = new System.Drawing.Font("Wingdings", 22);
+                    homeShip.TextAlign = ContentAlignment.MiddleCenter;
+                    homeShip.Font = new Font("Wingdings", 22);
                     homeShip.Text = Convert.ToString(i) + Convert.ToString(j);
                     homeShip.Text = " ";
                     HomeShips.Controls.Add(homeShip, j, i);
-                    homeShip.Click += Label_Click_Home;
+                    //homeShip.Click += Label_Click_Home;
                     
                     
                     Label enemyShip = new Label();
                     enemyShip.Dock = DockStyle.Fill;
-                    enemyShip.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-                    enemyShip.Font = new System.Drawing.Font("Wingdings", 22);
+                    enemyShip.TextAlign = ContentAlignment.MiddleCenter;
+                    enemyShip.Font = new Font("Wingdings", 22);
                     enemyShip.Text = " ";
                     enemyShip.Text = Chars.Substring(0, 1);
                     EnemyShips.Controls.Add(enemyShip, j, i);
@@ -117,7 +127,7 @@ namespace Warship
             for (int i = 1; i < 11; i++)
             {
                 Label enemyShip = EnemyShips.Controls[i*11] as Label;
-                enemyShip.Font = new System.Drawing.Font("Arial", 12);
+                enemyShip.Font = new Font("Arial", 12);
                 enemyShip.Text = Convert.ToString(i);
 
             }
@@ -125,7 +135,7 @@ namespace Warship
             for (int j = 1; j < 11; j++)
             {
                 Label enemyShip = EnemyShips.Controls[j] as Label;
-                enemyShip.Font = new System.Drawing.Font("Arial", 12);
+                enemyShip.Font = new Font("Arial", 12);
                 enemyShip.Text = Convert.ToString(Title[j]);
 
             }
@@ -133,7 +143,7 @@ namespace Warship
             for (int i = 1; i < 11; i++)
             {
                 Label homeShip = HomeShips.Controls[i*11] as Label;
-                homeShip.Font = new System.Drawing.Font("Arial", 12);
+                homeShip.Font = new Font("Arial", 12);
                 homeShip.Text = Convert.ToString(i);
 
             }
@@ -141,17 +151,16 @@ namespace Warship
             for (int j = 1; j < 11; j++)
             {
                 Label homeShip = HomeShips.Controls[j] as Label;
-                homeShip.Font = new System.Drawing.Font("Arial", 12);
+                homeShip.Font = new Font("Arial", 12);
                 homeShip.Text = Convert.ToString(Title[j]);
 
             }
 
             GenerateMap(HomeMap);
-            //GenerateMap(EnemyMap);
             ShowMap(HomeMap, HomeShips);
-            //ShowMap(EnemyMap, EnemyShips);
             int clientProcessId = Process.GetCurrentProcess().Id;
             Message clientProcessIdMessage = new Message(clientProcessId, MessageType.startPlayerMessage);
+         
             HomeClient client = new HomeClient();
             EnemyServer enemyServer = new EnemyServer(HomeMap, this);
             enemyServer.serverStart();
@@ -173,26 +182,25 @@ namespace Warship
             return sentMessage.ProcessId < receivedMessage.ProcessId;  
         }
 
-        private void Label_Click_Home(object sender, EventArgs e)
-        {
-            //Label a = new Label();
-            //a = sender as Label;
-            //Point homeCoordinates = GetHomeCoordinates(a);
+        //private void Label_Click_Home(object sender, EventArgs e)
+        //{
+        //    Label a = new Label();
+        //    a = sender as Label;
+        //    Point homeCoordinates = GetHomeCoordinates(a);
 
-            //switch ((string) a.Text)
-            //{
-            //    case " ":
-            //        a.Text = Convert.ToString(Chars[1]);
-            //        a.ForeColor = Color.Black;
-            //        break;
-            //    case "o":
-            //        a.Text = Convert.ToString(Chars[3]);
-            //        a.ForeColor = Color.Black;
-            //        break;
-            //}
+        //    switch ((string)a.Text)
+        //    {
+        //        case " ":
+        //            a.Text = Convert.ToString(Chars[1]);
+        //            a.ForeColor = Color.Black;
+        //            break;
+        //        case "o":
+        //            a.Text = Convert.ToString(Chars[3]);
+        //            a.ForeColor = Color.Black;
+        //            break;
+        //    }
 
-        }
-
+        //}
 
         private Point GetEnemyCoordinates(Label clickedLabel)
         {
@@ -210,7 +218,6 @@ namespace Warship
                 HomeClient homeClient = new HomeClient();
                 Message message = new Message(enemyCoordinates, MessageType.pointMessage);
                 message = homeClient.SendAndGetAnswer(message);
-                //int turn = Convert.ToInt32(homeClient.turnSend(message));
 
                
                     switch (message.PointValue)
@@ -227,10 +234,6 @@ namespace Warship
                             a.ForeColor = Color.Black;
                             break;
                     }
-
-
-                
-            
 
         }
     }
