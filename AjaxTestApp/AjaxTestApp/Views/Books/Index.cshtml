@@ -1,0 +1,42 @@
+﻿@model IEnumerable<AjaxTestApp.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+ 
+<p>
+  <div id="createLink">
+    @Ajax.ActionLink("Create", "Create", new AjaxOptions {UpdateTargetId = "popupCreateForm", HttpMethod = "Get", OnSuccess = "ShowCreateForm"})
+  </div>
+</p>
+<div id="booksData">
+    @{
+        Html.RenderPartial("BooksData", Model);
+    }
+</div>
+
+<div class="bg-modal">
+    <div id="popupCreateForm" class="modal-content">
+        <div class="close">
+            HUI
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    function ShowCreateForm() {
+        //$('#popupCreateForm').show();
+        //$('.bg-modal, .modal-content').css("display","inline-block");
+        $('.bg-modal, .modal-content').fadeIn("fast");
+        $('.close').on('click', function() {
+            $('.bg-modal').css("display","none");
+            alert(".bg-modal closed");
+        });
+
+        //alert("Форма показывается \n");
+    }
+</script>
