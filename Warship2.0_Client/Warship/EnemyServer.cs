@@ -57,11 +57,11 @@ namespace Warship
             {
                 Console.WriteLine("Ожидание подключений... ");
 
-                // получаем входящее подключение
+                // getting incoming connection
                 TcpClient client = server.AcceptTcpClient();
                 Console.WriteLine("Подключен клиент. Выполнение запроса...");
 
-                // получаем сетевой поток для чтения и записи
+                // getting network stream for reading and writing
                 NetworkStream stream = client.GetStream();
 
                 IFormatter formatter = new BinaryFormatter();
@@ -87,17 +87,15 @@ namespace Warship
                 }
 
 
-                // сообщение для отправки клиенту
+                // message for client
 
-                // преобразуем сообщение в массив байтов
+                // convert message to byte array
                 data = ObjectToByteArray(response);
 
-                // отправка сообщения
+                // sending message
                 stream.Write(data, 0, data.Length);
                 Console.WriteLine("Отправлено сообщение: {0}", response);
-                // закрываем поток
                 stream.Close();
-                // закрываем подключение
                 client.Close();
             }
         }
